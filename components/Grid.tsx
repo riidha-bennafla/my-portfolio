@@ -16,7 +16,19 @@ const Grid = () => {
       case 3:
         return <TechStackCard key={item.id} {...item} />;
       case 6:
-        return <ContactCard key={item.id} {...item} />;
+        return (
+          <ContactCard
+            key={item.id}
+            {...item}
+            email="example@email.com"
+            enableAudio
+            enableConfetti
+            enableHaptics
+            enableAnalytics={false}
+            theme="dark"
+            locale="en"
+          />
+        );
       default:
         return <BasicCard key={item.id} {...item} />;
     }
