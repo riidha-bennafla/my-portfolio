@@ -1,11 +1,13 @@
+"use client";
+
 import {
   BentoGrid,
   BasicCard,
   TechStackCard,
-  ContactCard,
   BentoCardProps,
   GridGlobeCard,
 } from "./bento-grid";
+import { ContactCard } from "./BentoGrid/ContactCard";
 import { gridItems } from "../data";
 
 const Grid = () => {
@@ -18,15 +20,14 @@ const Grid = () => {
       case 6:
         return (
           <ContactCard
-            key={item.id}
-            {...item}
-            email="example@email.com"
-            enableAudio
-            enableConfetti
-            enableHaptics
-            enableAnalytics={false}
-            theme="dark"
-            locale="en"
+            title="Contact"
+            description="Available for freelance work and collaborations"
+            email="work@yourportfolio.com"
+            locale="fr" // French localization
+            enableHaptics={false} // Disable vibration on mobile
+            className="border-2 border-purple-500/30 rounded-3xl"
+            titleClassName="text-xl font-bold text-purple-300"
+            onCopySuccess={(email) => console.log("Copied:", email)}
           />
         );
       default:
