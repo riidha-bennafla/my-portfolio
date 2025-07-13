@@ -197,7 +197,7 @@ export const ContactCard = ({
         {/* Card title */}
         <h4
           id="contact-card-title"
-          className="font-sans text-lg lg:text-3xl font-bold z-10 justify-center md:max-w-full max-w-60 text-center"
+          className="font-sans text-lg lg:text-3xl font-bold z-10 justify-center md:max-w-full max-w-60 text-center mx-auto"
         >
           {title}
         </h4>
@@ -210,7 +210,7 @@ export const ContactCard = ({
         )}
 
         {/* Copy button */}
-        <div className="mt-4">
+        <div className="mt-4 relative flex items-center">
           <ContactButton
             status={status}
             onClick={handleCopy}

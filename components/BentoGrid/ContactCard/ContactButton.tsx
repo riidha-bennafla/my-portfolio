@@ -82,18 +82,18 @@ export const ContactButton = memo(
         aria-busy={status === "copying"}
         aria-label={stateConfig.ariaLabel}
         className={cn(
-          "w-full flex items-center justify-center py-3 px-6 rounded-lg",
-          "text-white font-medium transition-all duration-300",
-          "focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
-          "focus-visible:ring-offset-2",
-          stateConfig.bg,
+          "relative inline-flex h-12 w-full max-w-80 mx-auto overflow-hidden rounded-lg p-[1px] sm:mt-3 md:mt-7 focus:outline-none cursor-pointer",
           disabled
             ? "cursor-not-allowed opacity-80 grayscale"
             : "cursor-pointer hover:scale-[1.02] transition-transform"
         )}
       >
-        <span className="mr-2">{stateConfig.icon}</span>
-        <span>{label}</span>
+        {/* Spinning gradient background */}
+        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+        <span className="inline-flex h-full w-full items-center justify-center rounded-lg bg-slate-950 px-7 md:px-12 text-sm font-medium text-white backdrop-blur-3xl gap-2">
+          <span className="mr-2">{stateConfig.icon}</span>
+          <span>{label}</span>
+        </span>
       </button>
     );
   }
