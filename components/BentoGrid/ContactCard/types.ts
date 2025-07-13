@@ -1,166 +1,122 @@
-// components/types.ts
+// components/BentoGrid/ContactCard/types.ts
 
+// =============================================
+// Core Card Properties
+// =============================================
 /**
  * Base properties for all Bento grid cards
  *
- * Follows atomic design principles with strict type safety
- * Supports all Next.js image optimization features
+ * Implements atomic design principles with strict type safety
+ * Supports Next.js image optimization patterns
  */
 export interface BentoCardProps {
-  /**
-   * Unique identifier for the card
-   * Used for analytics tracking and DOM identification
-   */
+  /** Unique component identifier for analytics/DOM */
   id?: string;
 
-  /**
-   * Main heading for the card
-   * Should be concise (under 60 characters)
-   */
+  /** Primary heading (max 60 characters) */
   title?: string;
 
-  /**
-   * Supporting description content
-   * Can be longer text explaining the card's purpose
-   */
+  /** Supporting content explaining card purpose */
   description?: string | React.ReactNode;
 
   /**
-   * Main visual element for the card
-   * Accepts static imports for Next.js optimized images
-   * Example:
-   *   import cardImage from '@/public/card.jpg'
-   *   <BentoCard img={cardImage} />
+   * Main visual element - optimized Next.js images
+   * @example
+   * import cardImage from '@/public/card.jpg'
+   * <BentoCard img={cardImage} />
    */
   img?: StaticImageData | string;
 
-  /**
-   * Additional image for decorative purposes
-   * Displayed subtly in the background
-   */
+  /** Decorative background image */
   spareImg?: StaticImageData | string;
 
-  /**
-   * Custom class names for the image container
-   * Allows position/size adjustments
-   */
+  /** Custom image container styling */
   imgClassName?: string;
 
-  /**
-   * Custom class names for the title element
-   * Allows typography customization
-   */
+  /** Title element styling overrides */
   titleClassName?: string;
 
-  /**
-   * Root container class names
-   * For layout and visual customization
-   */
+  /** Root container class names */
   className?: string;
 
-  /**
-   * Header component slot
-   * Replaces default title/description rendering
-   */
+  /** Custom header component slot */
   header?: React.ReactNode;
 
-  /**
-   * Footer component slot
-   * Rendered at the bottom of the card
-   */
+  /** Custom footer component slot */
   footer?: React.ReactNode;
 
-  /**
-   * Click handler for the entire card
-   * Use for navigation or expansion
-   */
+  /** Primary interaction handler */
   onClick?: () => void;
 
-  /**
-   * Animation variant for card entrance
-   * Default: 'fadeIn'
-   */
+  /** Entrance animation variant */
   animation?: "fadeIn" | "slideUp" | "scaleIn" | "none";
 
-  /**
-   * Visual emphasis level
-   * Default: 'base'
-   */
+  /** Visual prominence level */
   emphasis?: "base" | "medium" | "high";
 
-  /**
-   * ARIA role attribute
-   * Default: 'region'
-   */
+  /** ARIA role attribute */
   role?: string;
 
-  /**
-   * Tab index for keyboard navigation
-   * Default: 0
-   */
+  /** Keyboard navigation index */
   tabIndex?: number;
 }
 
+// =============================================
+// Contact Card Specialization
+// =============================================
 /**
- * Type for contact-specific card properties
- * Extends the base BentoCardProps
+ * Contact-specific card properties extending base
+ *
+ * Adds email functionality with multi-sensory feedback
  */
 export interface ContactCardProps extends BentoCardProps {
-  /**
-   * Email address to display and copy
-   * Default: 'contact@example.com'
-   */
+  /** Default: 'contact@example.com' */
   email?: string;
 
-  /**
-   * Enable audio feedback on interactions
-   * Default: true
-   */
+  /** Enable auditory feedback */
   enableAudio?: boolean;
 
-  /**
-   * Enable haptic feedback on interactions
-   * Default: true on supported devices
-   */
+  /** Enable tactile feedback */
   enableHaptics?: boolean;
 
-  /**
-   * Localization key
-   * Supports 'en', 'es', 'fr' out of the box
-   * Default: 'en'
-   */
-  locale?: string;
+  /** Supported locales */
+  locale?: Locale;
 
   /**
-   * Callback for successful copy action
-   * @param email - The copied email address
-   * @param method - The clipboard method used
+   * Copy success handler
+   * @param email - Copied email address
+   * @param method - Clipboard API method used
    */
   onCopySuccess?: (email: string, method: "modern" | "legacy") => void;
 
   /**
-   * Callback for failed copy action
-   * @param error - Error message
-   * @param email - The attempted email address
+   * Copy failure handler
+   * @param error - Error description
+   * @param email - Attempted email address
    */
   onCopyError?: (error: string, email: string) => void;
 }
 
+// =============================================
+// Analytics & Performance
+// =============================================
 /**
- * Type for analytics events from bento cards
+ * Component analytics event structure
+ *
+ * Follows Google Analytics event model standards
  */
 export interface CardAnalyticsEvent {
-  /** Component name where event originated */
+  /** Originating component name */
   component: string;
 
   /** Event name/type */
   event: string;
 
-  /** ISO timestamp */
+  /** ISO 8601 timestamp */
   timestamp: string;
 
-  /** Additional event metadata */
-  metadata?: Record<string, any>;
+  /** Event metadata (JSON-serializable values only) */
+  metadata?: Record<string, string | number | boolean | null>;
 
   /** User device context */
   device: {
@@ -171,115 +127,129 @@ export interface CardAnalyticsEvent {
 }
 
 /**
- * Type for performance metrics
+ * Performance metrics tracking
+ *
+ * Aligns with Web Vitals specifications
  */
 export interface CardPerformanceMetrics {
-  /** Component load time in ms */
-  loadTime: number;
+  /** Component load duration (ms) */
+  loadTime?: number;
 
-  /** First contentful paint in ms */
+  /** First Contentful Paint (ms) */
   fcp?: number;
 
-  /** Largest contentful paint in ms */
+  /** Largest Contentful Paint (ms) */
   lcp?: number;
 
-  /** Cumulative layout shift score */
+  /** Cumulative Layout Shift score */
   cls?: number;
 
-  /** Memory usage in MB */
+  /** Memory consumption (MB) */
   memory?: number;
 }
 
-// Image optimization types
-export type StaticImageData = {
+// =============================================
+// Media & Styling Types
+// =============================================
+/** Next.js image optimization format */
+export type StaticImageData = Readonly<{
   src: string;
   height: number;
   width: number;
   blurDataURL?: string;
-};
+}>;
 
 /**
- * Type for theme configuration
+ * Theme configuration
+ *
+ * Supports light/dark/system modes
  */
-export type ThemeConfig = {
-  /** Color mode */
+export type ThemeConfig = Readonly<{
   mode: "light" | "dark" | "system";
-
-  /** Primary color palette */
   primary: string;
-
-  /** Secondary color palette */
   secondary: string;
-
-  /** Card style variant */
   cardVariant: "elevated" | "outlined" | "filled";
-};
+}>;
 
+// =============================================
+// Accessibility Specifications
+// =============================================
 /**
- * Type for accessibility settings
+ * WCAG 2.2 compliant settings
+ *
+ * Mirrors browser preference APIs
  */
-export type AccessibilityConfig = {
-  /** Reduce motion preference */
+export type AccessibilityConfig = Readonly<{
   reducedMotion: boolean;
-
-  /** High contrast mode */
   highContrast: boolean;
-
-  /** Screen reader announcements */
   screenReader: boolean;
-
-  /** Font scaling percentage */
   fontSize: number;
-};
+}>;
 
 /**
- * Context type for card container
+ * User preference profile
+ *
+ * Combines accessibility and localization settings
+ */
+export type UserPreference = Readonly<{
+  accessibility: AccessibilityConfig;
+  locale: Locale;
+  colorScheme: "light" | "dark";
+}>;
+
+// =============================================
+// Context & Layout Types
+// =============================================
+/**
+ * Global card context
+ *
+ * Provides theming, a11y, and analytics
  */
 export interface CardContextType {
-  /** Current theme configuration */
   theme: ThemeConfig;
-
-  /** Accessibility settings */
   accessibility: AccessibilityConfig;
-
-  /** Analytics handler */
   trackEvent: (event: CardAnalyticsEvent) => void;
-
-  /** Performance measurement */
   perfMetrics: CardPerformanceMetrics;
 }
 
-// Card size variants
+/**
+ * Card sizing dimensions
+ *
+ * @small 150px
+ * @medium 300px
+ * @large 450px
+ * @xlarge 600px
+ */
 export type CardSize = "small" | "medium" | "large" | "xlarge";
 
 /**
  * Grid position descriptor
+ *
+ * @deprecated Prefer CSS Grid layout - will migrate to fractional units in v2
  */
 export interface GridPosition {
-  /** Row start position */
   rowStart: number;
-
-  /** Row span */
   rowSpan: number;
-
-  /** Column start position */
   colStart: number;
-
-  /** Column span */
   colSpan: number;
 }
 
+// =============================================
+// Component Configuration
+// =============================================
 /**
- * Bento grid card configuration
+ * Bento grid card definition
+ *
+ * @typeparam T - Component props type
  */
-export interface BentoGridCard {
-  /** Component to render */
-  component: React.ComponentType<any>;
+export interface BentoGridCard<T = Record<string, unknown>> {
+  /** React component reference */
+  component: React.ComponentType<T>;
 
-  /** Props to pass to component */
-  props: Record<string, any>;
+  /** Component-specific props */
+  props: T;
 
-  /** Grid positioning */
+  /** Grid placement */
   position: GridPosition;
 
   /** Size variant */
@@ -289,7 +259,15 @@ export interface BentoGridCard {
   priority?: boolean;
 }
 
-// Export all types
+// =============================================
+// Localization & Internationalization
+// =============================================
+/** Supported locale codes */
+export type Locale = "en" | "es" | "fr" | "de" | "ja";
+
+// =============================================
+// Export Aliases
+// =============================================
 export type {
   BentoCardProps as CardProps,
   ContactCardProps as ContactProps,

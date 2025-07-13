@@ -20,12 +20,9 @@ const Grid = () => {
       case 6:
         return (
           <ContactCard
-            title="Contact"
-            description="Available for freelance work and collaborations"
-            email="work@yourportfolio.com"
-            locale="fr" // French localization
-            enableHaptics={false} // Disable vibration on mobile
-            className="border-2 border-purple-500/30 rounded-3xl"
+            title="Do you want to start a project together?"
+            enableHaptics={true}
+            className="md:col-span-6 lg:col-span-2 lg:row-span-3"
             titleClassName="text-xl font-bold text-purple-300"
             onCopySuccess={(email) => console.log("Copied:", email)}
           />

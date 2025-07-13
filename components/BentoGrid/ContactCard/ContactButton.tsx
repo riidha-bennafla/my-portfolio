@@ -1,9 +1,21 @@
-// components/contact/ContactCard/ContactButton.tsx
-import React, { memo } from "react";
-import { IoCopyOutline } from "react-icons/io5";
-import { cn } from "@/lib/utils";
+// components/BentoGrid/ContactCard/ContactButton.tsx
 
-type ButtonStatus = "idle" | "copying" | "copied" | "error";
+// =============================================
+// Component Imports
+// =============================================
+import React, { memo } from "react";
+import { cn } from "@/lib/utils";
+import {
+  CopyIcon,
+  CopyingIcon,
+  SuccessIcon,
+  ErrorIcon,
+} from "@/components/icons";
+
+// =============================================
+// Type Definitions
+// =============================================
+export type ButtonStatus = "idle" | "copying" | "copied" | "error";
 
 interface ContactButtonProps {
   status: ButtonStatus;
@@ -12,73 +24,79 @@ interface ContactButtonProps {
   disabled?: boolean;
 }
 
+// =============================================
+// Button State Configuration
+// =============================================
 const ButtonStates = {
   idle: {
     bg: "bg-blue-600 hover:bg-blue-700",
-    icon: <IoCopyOutline className="w-4 h-4" />,
+    icon: <CopyIcon />,
+    ariaLabel: "Copy email address",
   },
   copying: {
     bg: "bg-gray-600",
-    icon: (
-      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-    ),
+    icon: <CopyingIcon />,
+    ariaLabel: "Copying in progress",
   },
   copied: {
     bg: "bg-green-600",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-4 h-4"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fillRule="evenodd"
-          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ),
+    icon: <SuccessIcon />,
+    ariaLabel: "Email copied",
   },
   error: {
     bg: "bg-red-600 hover:bg-red-700",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-4 h-4"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fillRule="evenodd"
-          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ),
+    icon: <ErrorIcon />,
+    ariaLabel: "Copy error occurred",
   },
-};
+} satisfies Record<
+  ButtonStatus,
+  {
+    bg: string;
+    icon: React.ReactNode;
+    ariaLabel: string;
+  }
+>;
 
+// =============================================
+// Main Component
+// =============================================
+/**
+ * Interactive button component for contact actions with visual state feedback
+ *
+ * @param {ButtonStatus} status - Current button state
+ * @param {function} onClick - Click handler function
+ * @param {string} label - Button text content
+ * @param {boolean} [disabled] - Disabled state flag
+ *
+ * @returns {JSX.Element} Stateful button UI
+ */
 export const ContactButton = memo(
   ({ status, onClick, label, disabled }: ContactButtonProps) => {
+    const stateConfig = ButtonStates[status] || ButtonStates.idle;
+
     return (
       <button
         onClick={onClick}
         disabled={disabled}
         aria-live="polite"
         aria-busy={status === "copying"}
+        aria-label={stateConfig.ariaLabel}
         className={cn(
           "w-full flex items-center justify-center py-3 px-6 rounded-lg",
           "text-white font-medium transition-all duration-300",
-          "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
-          ButtonStates[status].bg,
-          disabled ? "cursor-not-allowed opacity-80" : "cursor-pointer"
+          "focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+          "focus-visible:ring-offset-2",
+          stateConfig.bg,
+          disabled
+            ? "cursor-not-allowed opacity-80 grayscale"
+            : "cursor-pointer hover:scale-[1.02] transition-transform"
         )}
       >
-        <span className="mr-2">{ButtonStates[status].icon}</span>
+        <span className="mr-2">{stateConfig.icon}</span>
         <span>{label}</span>
       </button>
     );
   }
 );
+
 ContactButton.displayName = "ContactButton";

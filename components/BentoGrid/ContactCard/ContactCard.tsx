@@ -1,3 +1,4 @@
+// components/BentoGrid/ContactCard/ContactCard.tsx
 // =============================================
 // Component Imports
 // =============================================
@@ -19,7 +20,7 @@ import { copyToClipboard } from "./utils/clipboard";
 import { triggerHapticFeedback } from "./utils/haptics";
 import { DEFAULT_EMAIL, TOAST_DURATION } from "./utils/constants";
 import type { BentoCardProps } from "./types";
-import type { Locale } from "./hooks/useTranslation";
+import type { LocaleType } from "./hooks/useTranslation";
 
 // =============================================
 // Type Definitions
@@ -28,7 +29,7 @@ interface ContactCardProps extends BentoCardProps {
   email?: string;
   enableAudio?: boolean;
   enableHaptics?: boolean;
-  locale?: string;
+  locale?: LocaleType;
   onCopySuccess?: (email: string, method: "modern" | "legacy") => void;
   onCopyError?: (error: string, email: string) => void;
 }
@@ -72,7 +73,7 @@ export const ContactCard = ({
   // =============================================
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isMounted = useRef(true);
-  const { t } = useTranslation(locale as Locale);
+  const { t } = useTranslation(locale as LocaleType);
   const [status, setStatus] = useState<ClipboardStatus>("idle");
   const [toast, setToast] = useState<{
     message: string;
@@ -181,26 +182,31 @@ export const ContactCard = ({
     <div
       className={cn(
         // Base card styling
-        "relative overflow-hidden rounded-3xl border border-white/[0.1] p-5",
-        "bg-gradient-to-br from-slate-900 to-slate-800",
-        "transition-all duration-300 hover:shadow-xl",
+        "row-span-1 relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4",
         className
       )}
+      style={{
+        background: "rgb(4,7,29)",
+        backgroundColor:
+          "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
+      }}
       aria-labelledby="contact-card-title"
       {...cardProps}
     >
-      <div className="relative z-10">
+      <div className="transition duration-200 relative md:h-full min-h-40 flex flex-col px-5 p-5 lg:p-10">
         {/* Card title */}
-        <h2
+        <h4
           id="contact-card-title"
-          className="text-lg font-semibold text-white mb-2"
+          className="font-sans text-lg lg:text-3xl font-bold z-10 justify-center md:max-w-full max-w-60 text-center"
         >
           {title}
-        </h2>
+        </h4>
 
         {/* Card description */}
         {description && (
-          <p className="text-white/70 text-sm mb-4">{description}</p>
+          <p className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-[#C1C2D3] z-10">
+            {description}
+          </p>
         )}
 
         {/* Copy button */}
