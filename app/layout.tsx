@@ -24,11 +24,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} ${ptMono.variable} antialiased`}>
         {" "}
-        <div className="w-full flex items-center flex-col z-[200]">
-          <div className="w-full h-full flex justify-center bg-main z-10">
-            <div className="relative w-full max-w-8xl px-3 md:px-3 pb-8 flex flex-col border-b border-solid border-neutral-800 shadow-xl text-padding z-[9]"></div>
-          </div>
-        </div>
         {children}
       </body>
     </html>

@@ -12,8 +12,9 @@ const DottedLink = ({
   rel = "",
   sup = false,
   supText,
-  ...props
+  arrowIcon,
 }: DottedLinkProps) => {
+  console.log(arrowIcon);
   // Determine if link is external (http/https) or internal
   const isExternal =
     link.startsWith("http") ||
@@ -48,15 +49,25 @@ const DottedLink = ({
 
   return isExternal ? (
     <>
-      <a href={link} target={resolvedTarget} rel={resolvedRel} {...props}>
+      <a href={link} target={resolvedTarget} rel={resolvedRel}>
         {linkContent}
       </a>
-      {sup && <Sup supValue={supText} />}
+      {sup && (
+        <Sup
+          supValue={supText}
+          className={arrowIcon ? "text-xs md:text-base lg:text-lg" : "text-xs"}
+        />
+      )}
     </>
   ) : (
-    <Link href={link} passHref legacyBehavior>
-      <a {...props}>{linkContent}</a>
-      {sup && <Sup supValue={supText} />}
+    <Link href={link}>
+      {linkContent}
+      {sup && (
+        <Sup
+          supValue={supText}
+          className={arrowIcon ? "text-xs md:text-sm lg:text-base" : "text-xs"}
+        />
+      )}
     </Link>
   );
 };

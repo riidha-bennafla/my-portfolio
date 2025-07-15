@@ -1,30 +1,30 @@
 import Caption from "@/components/ui/Caption";
 import DottedLink from "@/components/ui/DottedLink";
-import React from "react";
+import { AboutProps } from "@/types";
 
-const About = () => {
+const About = ({ title, content }: AboutProps) => {
   return (
-    <div className="flex flex-col col-start-1 col-end-13 md:col-end-5 gap-3">
-      <Caption text="About" />
-      <p className="col-start-1  md:col-start-1 md:col-span-5 col-end-13 mb-4 md:mb-0 text-white z-1000">
-        Jo (He/Him) designs interfaces. He thrives in complex, ambiguous problem
-        spaces focused around interactive media, digital tooling, and multimodal
-        interaction. He studied{" "}
-        <DottedLink
-          link="https://design.cmu.edu/"
-          target="_blank"
-          title="computer science design"
-          sup
-          supText="↗"
-        />{" "}
-        at{" "}
-        <DottedLink
-          link="https://www.cmu.edu/"
-          target="_blank"
-          title="Carnegie Mellon University"
-          sup
-          supText="↗"
-        />
+    <div className="flex-col col-start-1 col-end-13 md:col-end-5 gap-3">
+      <Caption text={title} />
+      <p className="col-start-1 md:col-start-1 md:col-span-5 col-end-13 mb-4 md:mb-0 body-font z-1000">
+        {content.map((segment) => {
+          if (segment.type === "link" && segment.link) {
+            return (
+              <DottedLink
+                key={segment.id}
+                link={segment.link}
+                target={segment.target}
+                title={segment.content}
+                sup={segment.sup}
+                supText={segment.supText}
+                arrowIcon={segment.arrowIcon}
+              />
+            );
+          } else if (segment.type === "break line") {
+            return <br key={segment.id} />;
+          }
+          return <span key={segment.id}>{segment.content}</span>;
+        })}
       </p>
     </div>
   );

@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex-col space-y-2 col-start-1 col-end-13 font-fira-code text-[13px] tracking-[0.08em] leading-[160%] md:col-start-1 md:col-end-6">
           <span className="flex flex-row space-x-2 align-middle">
             <p className="self-center w-min px-2 pt-1 pb-[2px] font-fira-code lowercase text-yellow-300 border-yellow-300 border border-solid rounded-full">
-              v2.0
+              v2.0.1
             </p>
             <p className="self-center px-2 pt-1 pb-[2px] font-fira-code uppercase text-zinc-600">
               Last updated 2025-07-15
@@ -63,7 +63,6 @@ const Footer = () => {
             <DottedLink
               link="mailto:bennafla.riidha@gmail.com"
               title="bennafla.riidha@gmail.com"
-              sup
               supText="3"
             />
           </span>

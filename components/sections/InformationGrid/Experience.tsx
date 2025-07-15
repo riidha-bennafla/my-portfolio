@@ -1,17 +1,34 @@
+// src/components/sections/InformationGrid/Experience.tsx
 import Caption from "@/components/ui/Caption";
 import { ExperienceTitle, ExperienceDescription } from "./ExperienceSections";
+import { cn } from "@/lib/utils";
+import { ExperienceProps } from "@/types";
 
-const Experience = () => {
+const Experience = ({ items, className }: ExperienceProps) => {
   return (
-    <div className="grid grid-cols-6 col-start-1 col-end-13 gap-3 md:col-start-7 ">
-      <Caption text="Experience" className="col-start-1" />
-      <Caption text="Description" className="col-start-3" />
-      <ExperienceTitle title="Design Lead" period="2022-2023" />
-      <ExperienceDescription description="Lead the design team for a real-time collaboration platform, developing a user-friendly interface and ensuring a smooth experience for users." />
-      <ExperienceTitle title="Design Lead" period="2021-2022" />
-      <ExperienceDescription description="Lead the design team for a real-time collaboration platform, developing a user-friendly interface and ensuring a smooth experience for users." />
-      <ExperienceTitle title="Design Lead" period="2020-2021" />
-      <ExperienceDescription description="Lead the design team for a real-time collaboration platform, developing a user-friendly interface and ensuring a smooth experience for users." />
+    <div
+      className={cn(
+        "grid grid-cols-6 col-start-1 col-end-13 gap-3 md:col-start-7",
+        className
+      )}
+    >
+      <Caption
+        text="Experience"
+        className="col-span-2 col-start-1"
+        aria-label="Experience section"
+      />
+      <Caption
+        text="Description"
+        className="col-span-4 col-start-3"
+        aria-label="Description section"
+      />
+
+      {items.map((item) => (
+        <div key={item.id} className="contents group">
+          <ExperienceTitle title={item.title} period={item.period} />
+          <ExperienceDescription description={item.description} />
+        </div>
+      ))}
     </div>
   );
 };

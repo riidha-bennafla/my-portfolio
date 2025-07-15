@@ -5,7 +5,7 @@ export interface LinkProps {
   target?: "_blank" | "_self" | "_parent" | "_top" | string;
   className?: string;
   rel?: RelAttribute;
-  linkArrow?: boolean;
+  arrowIcon?: boolean;
 }
 
 export interface PortfolioProjectProps extends LinkProps {

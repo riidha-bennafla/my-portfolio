@@ -1,13 +1,54 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "tailwindcss";
 /*
-=====================================
-======        Fonts        ==========
-=====================================
+===================================
+======      Typography      =======
+===================================
 */
 
+/* Fonts */
 @theme {
   --font-fira-code: "Fira Code", monospace;
+  --font-montserrat: "Montserrat", sans-serif;
+}
+
+@layer utilities {
+  .nav-font {
+    @apply font-montserrat text-sm lg:text-[15px] font-medium text-zinc-50;
+  }
+
+  .body-font {
+    @apply font-montserrat text-zinc-50;
+  }
+
+  .experience-title-font {
+    @apply font-montserrat text-zinc-50 font-semibold;
+  }
+
+  .experience-period-font {
+    @apply font-montserrat text-gray-300 text-sm;
+  }
+
+  .experience-description-font {
+    @apply font-montserrat text-zinc-50;
+  }
+
+  .caption-font-title {
+    @apply text-zinc-50 text-[13px] tracking-[0.08em] leading-[160%] font-fira-code uppercase;
+  }
+
+  .caption-font-subtitle {
+    @apply text-zinc-500 text-[13px] tracking-[0.08em] leading-[160%] font-fira-code uppercase;
+  }
+
+  .caption-font-default {
+    @apply text-white text-[13px] tracking-[0.08em] leading-[160%] opacity-40 font-fira-code uppercase;
+  }
+
+  .sup-font {
+    @apply font-montserrat text-yellow-300 leading-[0] font-light;
+  }
 }
 
 /* 
@@ -19,6 +60,61 @@
 @theme {
   --color-main: #111111;
   --color-sub: #1c1c1c;
+}
+
+/*
+===============================
+=====       Borders       =====
+===============================
+*/
+
+@layer utilities {
+  .border-b-white\/10 {
+    @apply border-b border-solid border-white/10;
+  }
+
+  .border-b-neutral-800 {
+    @apply border-b border-solid border-neutral-800;
+  }
+}
+
+/* 
+========================================
+====   Possition & Display & Size   ====
+========================================
+*/
+
+@layer utilities {
+  /* ---- Display ---- */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-center-col {
+    @apply flex flex-col items-center;
+  }
+
+  .flex-center-j {
+    @apply flex justify-center;
+  }
+
+  .flex-col {
+    @apply flex flex-col;
+  }
+
+  /* ---- Position ---- */
+  .sticky-top {
+    @apply sticky top-0;
+  }
+
+  /* ---- Size ---- */
+  .max-w-8xl {
+    max-width: 1800px;
+  }
+
+  .size-full {
+    @apply w-full h-full;
+  }
 }
 
 /* 
@@ -35,10 +131,6 @@
   body {
     @apply antialiased;
   }
-}
-
-@utility max-w-8xl {
-  max-width: 1800px;
 }
 
 @utility text-padding {

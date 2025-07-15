@@ -1,13 +1,11 @@
+import { cn } from "./../../lib/utils";
 type SupProps = {
   supValue?: string;
+  className?: string;
 };
 
-const Sup = ({ supValue }: SupProps) => {
-  return (
-    <sup className="text-yellow-300 text-[12px] leading-[0] font-light">
-      {supValue}
-    </sup>
-  );
+const Sup = ({ supValue, className }: SupProps) => {
+  return <sup className={cn("sup-font", className)}>{supValue}</sup>;
 };
 
 export default Sup;
