@@ -1,34 +1,25 @@
-import Grid from "@/components/Grid";
-import Hero from "@/components/Hero";
-import { FloatingNav } from "@/components/ui/FlotingNav";
-import { FaHome, FaUser } from "react-icons/fa";
-import { FaMessage } from "react-icons/fa6";
+import Footer from "@/components/sections/Footer/Footer";
+import InformationGrid from "@/components/sections/InformationGrid/InformationGrid";
+import Navbar from "@/components/sections/Navbar/Navbar";
+import Portfolio from "@/components/sections/Portfolio/Portfolio";
 
 export default function Home() {
-  const navItems = [
-    {
-      name: "Home",
-      link: "/",
-      icon: <FaHome className="h-4 w-4 text-neutral-500 dark:text-white" />,
-    },
-    {
-      name: "About",
-      link: "#about",
-      icon: <FaUser className="h-4 w-4 text-neutral-500 dark:text-white" />,
-    },
-    {
-      name: "Contact",
-      link: "/contact",
-      icon: <FaMessage className="h-4 w-4 text-neutral-500 dark:text-white" />,
-    },
-  ];
   return (
-    <main className="relative bg-black-100 flex items-center justify-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
-      <div className="max-w-7xl w-full">
-        <FloatingNav navItems={navItems} />
-        <Hero />
-        <Grid />
+    <>
+      <div className="w-full flex items-center flex-col z-[200]">
+        <div className="w-full h-full flex justify-center bg-main z-10">
+          <div className="relative w-full max-w-8xl px-3 md:px-3 pb-8 flex flex-col border-b border-solid border-neutral-800 shadow-xl text-padding z-[9]">
+            <Navbar />
+            <main>
+              <section className="relative w-full max-w-8xl grid grid-col-12 grid-gap z-10">
+                <InformationGrid />
+                <Portfolio />
+              </section>
+            </main>
+          </div>
+        </div>
       </div>
-    </main>
+      <Footer />
+    </>
   );
 }
