@@ -1,8 +1,13 @@
 // src/components/ui/DottedLink.tsx
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/helpers";
 import Link from "next/link";
-import { DottedLinkProps } from "@/types";
-import Sup from "./Sup";
+import { LinkProps } from "@/types";
+import { Sup } from "./Text";
+
+interface DottedLinkProps extends LinkProps {
+  sup?: boolean;
+  supText?: string;
+}
 
 const DottedLink = ({
   link,
@@ -14,7 +19,6 @@ const DottedLink = ({
   supText,
   arrowIcon,
 }: DottedLinkProps) => {
-  console.log(arrowIcon);
   // Determine if link is external (http/https) or internal
   const isExternal =
     link.startsWith("http") ||
@@ -52,22 +56,12 @@ const DottedLink = ({
       <a href={link} target={resolvedTarget} rel={resolvedRel}>
         {linkContent}
       </a>
-      {sup && (
-        <Sup
-          supValue={supText}
-          className={arrowIcon ? "text-xs md:text-base lg:text-lg" : "text-xs"}
-        />
-      )}
+      {sup && <Sup text={supText} arrowIcon={arrowIcon} />}
     </>
   ) : (
     <Link href={link}>
       {linkContent}
-      {sup && (
-        <Sup
-          supValue={supText}
-          className={arrowIcon ? "text-xs md:text-sm lg:text-base" : "text-xs"}
-        />
-      )}
+      {sup && <Sup text={supText} arrowIcon={arrowIcon} />}
     </Link>
   );
 };

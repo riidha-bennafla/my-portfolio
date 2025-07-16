@@ -1,26 +1,90 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-
 @import "tailwindcss";
-/*
-===================================
-======      Typography      =======
-===================================
-*/
 
+/* ===== THEME DEFINITIONS ===== */
 /* Fonts */
 @theme {
+  /* Color palette */
+  --color-main: #111111;
+  --color-secondary: #1c1c1c;
+  --color-accent: #ff6f00;
+  --color-text: var(--color-zinc-50);
+  --color-text-muted: var(--color-zinc-500);
+  --color-border: #808080;
+
+  /* Typography */
   --font-fira-code: "Fira Code", monospace;
   --font-montserrat: "Montserrat", sans-serif;
+
+  /* Spacing */
+  --grid-gap: 0.75rem;
+  --container-padding: 1rem;
 }
 
-@layer utilities {
-  .nav-font {
-    @apply font-montserrat text-sm lg:text-[15px] font-medium text-zinc-50;
+/* ===== BASE STYLES ===== */
+
+@layer base {
+  html {
+    @apply scroll-smooth bg-main;
   }
 
-  .body-font {
-    @apply font-montserrat text-zinc-50;
+  body {
+    @apply font-montserrat text-text bg-main antialiased;
   }
+}
+
+/* ===== UTILITIES ===== */
+
+@layer utilities {
+  /* Font styles */
+  .nav-font {
+    @apply text-sm lg:text-[15px] font-medium;
+  }
+
+  .mono-font {
+    @apply font-fira-code text-[13px] tracking-[0.08em] leading-[160%];
+  }
+
+  /* Border styles */
+  .border-b-white\/10 {
+    @apply border-b border-solid border-white/10;
+  }
+
+  .border-b-neutral-800 {
+    @apply border-b border-solid border-neutral-800;
+  }
+
+  /* Flex styles */
+  .flex-row {
+    @apply flex flex-row;
+  }
+  .flex-items-center-col {
+    @apply flex flex-col items-center;
+  }
+  .justify-center {
+    @apply flex justify-center;
+  }
+
+  /* Position styles */
+  .sticky-top {
+    @apply sticky top-0;
+  }
+
+  .sticky-bottom {
+    @apply sticky bottom-0;
+  }
+
+  /* Components styles */
+  .version-styles {
+    @apply self-center w-min px-2 pt-1 pb-0.5 font-fira-code lowercase text-yellow-300 border-yellow-300 border border-solid rounded-full select-none;
+  }
+
+  .update-date-styles {
+    @apply self-center px-2 pt-1 pb-0.5 font-fira-code uppercase text-zinc-600 select-none;
+  }
+}
+/* @layer utilities {
+
 
   .experience-title-font {
     @apply font-montserrat text-zinc-50 font-semibold;
@@ -34,49 +98,7 @@
     @apply font-montserrat text-zinc-50;
   }
 
-  .caption-font-title {
-    @apply text-zinc-50 text-[13px] tracking-[0.08em] leading-[160%] font-fira-code uppercase;
-  }
-
-  .caption-font-subtitle {
-    @apply text-zinc-500 text-[13px] tracking-[0.08em] leading-[160%] font-fira-code uppercase;
-  }
-
-  .caption-font-default {
-    @apply text-white text-[13px] tracking-[0.08em] leading-[160%] opacity-40 font-fira-code uppercase;
-  }
-
-  .sup-font {
-    @apply font-montserrat text-yellow-300 leading-[0] font-light;
-  }
-}
-
-/* 
-======================================
-======        Colors        ==========
-======================================
-*/
-
-@theme {
-  --color-main: #111111;
-  --color-sub: #1c1c1c;
-}
-
-/*
-===============================
-=====       Borders       =====
-===============================
-*/
-
-@layer utilities {
-  .border-b-white\/10 {
-    @apply border-b border-solid border-white/10;
-  }
-
-  .border-b-neutral-800 {
-    @apply border-b border-solid border-neutral-800;
-  }
-}
+} */
 
 /* 
 ========================================
@@ -88,14 +110,6 @@
   /* ---- Display ---- */
   .flex-center {
     @apply flex items-center justify-center;
-  }
-
-  .flex-center-col {
-    @apply flex flex-col items-center;
-  }
-
-  .flex-center-j {
-    @apply flex justify-center;
   }
 
   .flex-col {

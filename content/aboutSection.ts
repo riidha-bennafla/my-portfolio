@@ -1,23 +1,8 @@
-import React from "react";
-import About from "./About";
-import Experience from "./Experience";
 import { ContentSegment, ExperienceItem } from "@/types";
 import { v4 as uuidv4 } from "uuid";
-const EXPERIENCE_ITEMS: ExperienceItem[] = [
-  {
-    id: "exp-1",
-    title: "Frontend Teacher",
-    period: "2024 summer",
-    description: (
-      <>
-        Taught students aged between 10 and 16 web development basics, allowing
-        them to be able to create basic websites using HTML and CSS, and
-        introducing them to the web dev world.
-      </>
-    ),
-  },
-];
-const ABOUT_ITEMS: ContentSegment[] = [
+import ExperienceDescription from "@/components/ui/ExperienceDescription";
+
+export const ABOUT_ITEMS: ContentSegment[] = [
   {
     id: uuidv4(),
     type: "text",
@@ -55,13 +40,16 @@ const ABOUT_ITEMS: ContentSegment[] = [
     content: " as an English language student.",
   },
 ];
-const InformationGrid = () => {
-  return (
-    <section className="my-6 grid-layout">
-      <About title="About" content={ABOUT_ITEMS} />
-      <Experience items={EXPERIENCE_ITEMS} />
-    </section>
-  );
-};
 
-export default InformationGrid;
+export const EXPERIENCE_ITEMS: ExperienceItem[] = [
+  {
+    id: "exp-1",
+    title: "Frontend Teacher",
+    period: "2024 summer",
+    description:
+      typeof ExperienceDescription === "function" &&
+      ExperienceDescription(
+        "Taught students aged between 10 and 16 web development basics, allowing them to be able to create basic websites using HTML and CSS, and introducing them to the web dev world."
+      ),
+  },
+];

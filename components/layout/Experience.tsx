@@ -1,8 +1,8 @@
 // src/components/sections/InformationGrid/Experience.tsx
-import Caption from "@/components/ui/Caption";
 import { ExperienceTitle, ExperienceDescription } from "./ExperienceSections";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/helpers";
 import { ExperienceProps } from "@/types";
+import { TextMono } from "@/components/ui/Text";
 
 const Experience = ({ items, className }: ExperienceProps) => {
   return (
@@ -12,12 +12,12 @@ const Experience = ({ items, className }: ExperienceProps) => {
         className
       )}
     >
-      <Caption
+      <TextMono
         text="Experience"
         className="col-span-2 col-start-1"
         aria-label="Experience section"
       />
-      <Caption
+      <TextMono
         text="Description"
         className="col-span-4 col-start-3"
         aria-label="Description section"

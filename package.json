@@ -4,9 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run update-version && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "update-version": "node scripts/update-version.js",
+    "version:patch": "npm version patch && npm run update-version && git add version.json utils/version.ts && git commit -m 'chore: update version info' && git push",
+    "version:minor": "npm version minor && npm run update-version && git add version.json utils/version.ts && git commit -m 'chore: update version info' && git push",
+    "version:major": "npm version major && npm run update-version && git add version.json utils/version.ts && git commit -m 'chore: update version info' && git push",
+    "deploy": "npm run update-version && npm run build",
+    "predeploy": "npm run update-version"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -24,6 +30,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
+    "husky": "^8.0.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -1,12 +1,12 @@
-import Caption from "@/components/ui/Caption";
+import { TextMono } from "@/components/ui/Text";
 import DottedLink from "@/components/ui/DottedLink";
 import { AboutProps } from "@/types";
 
 const About = ({ title, content }: AboutProps) => {
   return (
     <div className="flex-col col-start-1 col-end-13 md:col-end-5 gap-3">
-      <Caption text={title} />
-      <p className="col-start-1 md:col-start-1 md:col-span-5 col-end-13 mb-4 md:mb-0 body-font z-1000">
+      <TextMono text={title} />
+      <p className="col-start-1 md:col-start-1 md:col-span-5 col-end-13 mb-4 md:mb-0 max-w-[26rem] text-pretty">
         {content.map((segment) => {
           if (segment.type === "link" && segment.link) {
             return (

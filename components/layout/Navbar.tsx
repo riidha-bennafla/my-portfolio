@@ -1,4 +1,4 @@
-import { personalInfo } from "@/data/personal";
+import { personalInfo } from "@/content/personal";
 import Link from "next/link";
 const Navbar = () => {
   return (
@@ -6,7 +6,7 @@ const Navbar = () => {
       <span className="col-span-4 col-start-1">
         <Link
           href="/"
-          className="text-white hover:text-yellow-300 duration-300 transition-color inline-flex"
+          className=" hover:text-yellow-300 duration-300 transition-color inline-flex"
         >
           <h1>{personalInfo.name}</h1>
         </Link>
